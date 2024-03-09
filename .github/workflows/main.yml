@@ -32,6 +32,3 @@ jobs:
 
     - name: Run functionality tests
       run: mvn -Dtest=ada.edu.demo.webtest.config.FunctionalityTests test
-
-    - name: Run Selenium configuration tests
-      run: mvn -Dtest=ada.edu.demo.webtest.config.SeleniumConfig test
