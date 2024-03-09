@@ -4,13 +4,17 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.*;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -21,6 +25,7 @@ class WebInterfaceTests {
 
 	@LocalServerPort
 	private int port;
+
 
 	@Test
 	@Order(1)
@@ -74,6 +79,31 @@ class WebInterfaceTests {
 		// Check if the text "Jamal" is present in the page content
 		assert(bodyElementFName.size() == 1);
 		assert(bodyElementLName.size() == 1);
+	}
+
+	@Test
+	@Order(3)
+	@DisplayName("Update Student Information")
+	public void updateStudentInformation() {
+		webDriver.get("http://localhost:" + port + "/student/update?id=123");
+
+		WebElement firstNameInput = webDriver.findElement(By.id("firstName"));
+		WebElement lastNameInput = webDriver.findElement(By.id("lastName"));
+		WebElement emailInput = webDriver.findElement(By.id("email"));
+
+		firstNameInput.clear();
+		firstNameInput.sendKeys("UpdatedFirstName");
+
+		lastNameInput.clear();
+		lastNameInput.sendKeys("UpdatedLastName");
+
+		emailInput.clear();
+		emailInput.sendKeys("updated@example.com");
+
+		WebElement submitButton = webDriver.findElement(By.id("submit"));
+		submitButton.click();
+
+		assertTrue(webDriver.getPageSource().contains("Student updated successfully!"));
 	}
 
 }
