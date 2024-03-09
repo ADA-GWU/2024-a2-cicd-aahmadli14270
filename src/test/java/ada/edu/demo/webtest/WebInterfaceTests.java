@@ -117,32 +117,39 @@ class WebInterfaceTests {
 	    // Wait until the form elements are present
 	    WebDriverWait wait = new WebDriverWait(webDriver, 10);
 	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("firstName")));
+	    System.out.println("Found first name input field");
+
 	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("lastName")));
+	    System.out.println("Found second name input field");
+
 	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("email")));
-	
+            System.out.println("Found third name input field");
+
+		
 	    // Fill out the form
 	    WebElement firstNameInput = webDriver.findElement(By.id("firstName"));
 	    WebElement lastNameInput = webDriver.findElement(By.id("lastName"));
 	    WebElement emailInput = webDriver.findElement(By.id("email"));
-	
+	    System.out.println("maybe error here1");
 	    firstNameInput.clear();
 	    firstNameInput.sendKeys("UpdatedFirstName");
-	
+	    System.out.println("maybe error here2");
 	    lastNameInput.clear();
 	    lastNameInput.sendKeys("UpdatedLastName");
-	
+            System.out.println("maybe error here3");
 	    emailInput.clear();
 	    emailInput.sendKeys("updated@example.com");
-	
+	    System.out.println("maybe error here4");
 	    // Submit the form
 	    WebElement submitButton = webDriver.findElement(By.id("submit"));
 	    submitButton.click();
-	
+	    System.out.println("maybe error here5");
 	    // Wait for the success message to appear
 	    WebElement successMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("successMessage")));
-	
+	    System.out.println("maybe error here6");
 	    // Check if the success message contains the expected text
 	    assertTrue(successMessage.getText().contains("Student updated successfully!"));
+	    System.out.println("maybe error here7");
 	}
 
 }
