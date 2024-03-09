@@ -112,7 +112,7 @@ class WebInterfaceTests {
 	@Order(3)
 	@DisplayName("Update Student Information")
 	public void updateStudentInformation() {
-	    webDriver.get("http://localhost:" + port + "/student/update?id=123");
+	    webDriver.get("http://localhost:" + port + "/student/update?id=1");
 	
 	    // Wait until the form elements are present
 	    WebDriverWait wait = new WebDriverWait(webDriver, 10);
