@@ -81,6 +81,38 @@ class WebInterfaceTests {
 		assert(bodyElementLName.size() == 1);
 	}
 
+	@Test
+	@Order(3)
+	@DisplayName("Update Student Information")
+	public void updateStudentInformation() {
+	    webDriver.get("http://localhost:" + port + "/student/update?id=123");
+	
+	    WebElement firstNameInput = webDriver.findElement(By.id("firstName"));
+	    WebElement lastNameInput = webDriver.findElement(By.id("lastName"));
+	    WebElement emailInput = webDriver.findElement(By.id("email"));
+	
+	    // Clear existing input values
+	    firstNameInput.clear();
+	    lastNameInput.clear();
+	    emailInput.clear();
+	
+	    // Enter new values
+	    firstNameInput.sendKeys("UpdatedFirstName");
+	    lastNameInput.sendKeys("UpdatedLastName");
+	    emailInput.sendKeys("updated@example.com");
+	
+	    // Find and submit the form
+	    WebElement submitButton = webDriver.findElement(By.id("submit"));
+	    submitButton.click();
+	
+	    // Wait for the success message
+	    WebDriverWait wait = new WebDriverWait(webDriver, 10);
+	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(), 'Student updated successfully!')]")));
+	
+	    // Check if the success message is displayed on the page
+	    assertTrue(webDriver.getPageSource().contains("Student updated successfully!"));
+	}
+
 
 
 }
