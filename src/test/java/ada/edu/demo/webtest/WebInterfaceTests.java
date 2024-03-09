@@ -91,6 +91,11 @@ class WebInterfaceTests {
 	    WebElement lastNameInput = webDriver.findElement(By.id("lastName"));
 	    WebElement emailInput = webDriver.findElement(By.id("email"));
 	
+	    // Check if the input fields are present
+	    assertNotNull(firstNameInput);
+	    assertNotNull(lastNameInput);
+	    assertNotNull(emailInput);
+	
 	    // Clear existing input values
 	    firstNameInput.clear();
 	    lastNameInput.clear();
@@ -105,12 +110,14 @@ class WebInterfaceTests {
 	    WebElement submitButton = webDriver.findElement(By.id("submit"));
 	    submitButton.click();
 	
-	    // Wait for the success message
+	    // Wait for the page to reload
 	    WebDriverWait wait = new WebDriverWait(webDriver, 10);
-	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(), 'Student updated successfully!')]")));
+	    wait.until(ExpectedConditions.urlContains("/student/list"));
 	
-	    // Check if the success message is displayed on the page
-	    assertTrue(webDriver.getPageSource().contains("Student updated successfully!"));
+	    // Check if the updated student information is displayed on the list page
+	    assertTrue(webDriver.getPageSource().contains("UpdatedFirstName"));
+	    assertTrue(webDriver.getPageSource().contains("UpdatedLastName"));
+	    assertTrue(webDriver.getPageSource().contains("updated@example.com"));
 	}
 
 
