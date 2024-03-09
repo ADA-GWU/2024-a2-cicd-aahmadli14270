@@ -23,3 +23,15 @@ jobs:
 
     - name: Build with Maven
       run: mvn -B clean verify
+
+    - name: Run unit and integration tests
+      run: mvn test
+
+    - name: Run web interface tests
+      run: mvn -Dtest=ada.edu.demo.webtest.WebInterfaceTests test
+
+    - name: Run functionality tests
+      run: mvn -Dtest=ada.edu.demo.webtest.config.FunctionalityTests test
+
+    - name: Run Selenium configuration tests
+      run: mvn -Dtest=ada.edu.demo.webtest.config.SeleniumConfig test
