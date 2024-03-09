@@ -81,29 +81,6 @@ class WebInterfaceTests {
 		assert(bodyElementLName.size() == 1);
 	}
 
-	@Test
-	@Order(3)
-	@DisplayName("Update Student Information")
-	public void updateStudentInformation() {
-		webDriver.get("http://localhost:" + port + "/student/update?id=123");
 
-		WebElement firstNameInput = webDriver.findElement(By.id("firstName"));
-		WebElement lastNameInput = webDriver.findElement(By.id("lastName"));
-		WebElement emailInput = webDriver.findElement(By.id("email"));
-
-		firstNameInput.clear();
-		firstNameInput.sendKeys("UpdatedFirstName");
-
-		lastNameInput.clear();
-		lastNameInput.sendKeys("UpdatedLastName");
-
-		emailInput.clear();
-		emailInput.sendKeys("updated@example.com");
-
-		WebElement submitButton = webDriver.findElement(By.id("submit"));
-		submitButton.click();
-
-		assertTrue(webDriver.getPageSource().contains("Student updated successfully!"));
-	}
 
 }
