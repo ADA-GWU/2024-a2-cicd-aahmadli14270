@@ -1,0 +1,40 @@
+name: Java CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        java-version: [11]
+
+    steps:
+    - name: Set up JDK ${{ matrix.java-version }}
+      uses: actions/setup-java@v2
+      with:
+        java-version: ${{ matrix.java-version }}
+    
+    - name: Set up Chrome WebDriver
+      uses: nanasess/setup-chromedriver@v1
+
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Build with Maven
+      run: mvn -B clean package -DskipTests
+
+    - name: Run unit and integration tests
+      run: mvn test
+
+    - name: Run web interface tests
+      run: mvn -Dtest=ada.edu.demo.webtest.WebInterfaceTests test
+
+    - name: Run functionality tests
+      run: mvn -Dtest=ada.edu.demo.webtest.config.FunctionalityTests test
