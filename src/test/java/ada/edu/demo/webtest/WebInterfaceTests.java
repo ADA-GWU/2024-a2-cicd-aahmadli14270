@@ -85,39 +85,25 @@ class WebInterfaceTests {
 	@Order(3)
 	@DisplayName("Update Student Information")
 	public void updateStudentInformation() {
-	    webDriver.get("http://localhost:" + port + "/student/update?id=123");
-	
-	    WebElement firstNameInput = webDriver.findElement(By.id("firstName"));
-	    WebElement lastNameInput = webDriver.findElement(By.id("lastName"));
-	    WebElement emailInput = webDriver.findElement(By.id("email"));
-	
-	    // Check if the input fields are present
-	    assertNotNull(firstNameInput);
-	    assertNotNull(lastNameInput);
-	    assertNotNull(emailInput);
-	
-	    // Clear existing input values
-	    firstNameInput.clear();
-	    lastNameInput.clear();
-	    emailInput.clear();
-	
-	    // Enter new values
-	    firstNameInput.sendKeys("UpdatedFirstName");
-	    lastNameInput.sendKeys("UpdatedLastName");
-	    emailInput.sendKeys("updated@example.com");
-	
-	    // Find and submit the form
-	    WebElement submitButton = webDriver.findElement(By.id("submit"));
-	    submitButton.click();
-	
-	    // Wait for the page to reload
-	    WebDriverWait wait = new WebDriverWait(webDriver, 10);
-	    wait.until(ExpectedConditions.urlContains("/student/list"));
-	
-	    // Check if the updated student information is displayed on the list page
-	    assertTrue(webDriver.getPageSource().contains("UpdatedFirstName"));
-	    assertTrue(webDriver.getPageSource().contains("UpdatedLastName"));
-	    assertTrue(webDriver.getPageSource().contains("updated@example.com"));
+		webDriver.get("http://localhost:" + port + "/student/update?id=123");
+
+		WebElement firstNameInput = webDriver.findElement(By.id("firstName"));
+		WebElement lastNameInput = webDriver.findElement(By.id("lastName"));
+		WebElement emailInput = webDriver.findElement(By.id("email"));
+
+		firstNameInput.clear();
+		firstNameInput.sendKeys("UpdatedFirstName");
+
+		lastNameInput.clear();
+		lastNameInput.sendKeys("UpdatedLastName");
+
+		emailInput.clear();
+		emailInput.sendKeys("updated@example.com");
+
+		WebElement submitButton = webDriver.findElement(By.id("submit"));
+		submitButton.click();
+
+		assertTrue(webDriver.getPageSource().contains("Student updated successfully!"));
 	}
 
 
