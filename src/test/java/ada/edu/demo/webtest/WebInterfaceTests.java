@@ -144,12 +144,15 @@ class WebInterfaceTests {
 	    WebElement submitButton = webDriver.findElement(By.id("submit"));
 	    submitButton.click();
 	    System.out.println("maybe error here5");
-	    // Wait for the success message to appear
-	    WebElement successMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("successMessage")));
+		
+	    webDriver.get("http://localhost:" + port + "/student/list");
 	    System.out.println("maybe error here6");
-	    // Check if the success message contains the expected text
-	    assertTrue(successMessage.getText().contains("Student updated successfully!"));
+
+	    List<WebElement> updatedStudents = webDriver.findElements(By.xpath("//*[contains(text(), 'UpdatedFirstName')]"));
 	    System.out.println("maybe error here7");
+
+    	    assertFalse(updatedStudents.isEmpty());
+	    System.out.println("maybe error here8");
 	}
 
 }
