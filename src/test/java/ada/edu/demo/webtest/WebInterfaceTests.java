@@ -112,33 +112,37 @@ class WebInterfaceTests {
 	@Order(3)
 	@DisplayName("Update Student Information")
 	public void updateStudentInformation() {
-		webDriver.get("http://localhost:" + port + "/student/update?id=123");
-
-		WebDriverWait wait = new WebDriverWait(webDriver, 10); // Wait up to 10 seconds
-		WebElement firstNameInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("firstName")));
-		WebElement lastNameInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("lastName")));
-		WebElement emailInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("email")));
-
-		firstNameInput.clear();
-		firstNameInput.sendKeys("UpdatedFirstName");
-
-		lastNameInput.clear();
-		lastNameInput.sendKeys("UpdatedLastName");
-
-		emailInput.clear();
-		emailInput.sendKeys("updated@example.com");
-
-		WebElement submitButton = webDriver.findElement(By.id("submit"));
-		submitButton.click();
-
-		// Wait for the page to reload after submission
-		wait.until(ExpectedConditions.stalenessOf(firstNameInput)); // Wait for the firstNameInput to disappear
-
-		// Get the updated page source
-		String pageSource = webDriver.getPageSource();
-
-		// Check if the page source contains the success message
-		assertTrue(pageSource.contains("Student updated successfully!"));
+	    webDriver.get("http://localhost:" + port + "/student/update?id=123");
+	
+	    // Wait until the form elements are present
+	    WebDriverWait wait = new WebDriverWait(webDriver, 10);
+	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("firstName")));
+	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("lastName")));
+	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("email")));
+	
+	    // Fill out the form
+	    WebElement firstNameInput = webDriver.findElement(By.id("firstName"));
+	    WebElement lastNameInput = webDriver.findElement(By.id("lastName"));
+	    WebElement emailInput = webDriver.findElement(By.id("email"));
+	
+	    firstNameInput.clear();
+	    firstNameInput.sendKeys("UpdatedFirstName");
+	
+	    lastNameInput.clear();
+	    lastNameInput.sendKeys("UpdatedLastName");
+	
+	    emailInput.clear();
+	    emailInput.sendKeys("updated@example.com");
+	
+	    // Submit the form
+	    WebElement submitButton = webDriver.findElement(By.id("submit"));
+	    submitButton.click();
+	
+	    // Wait for the success message to appear
+	    WebElement successMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("successMessage")));
+	
+	    // Check if the success message contains the expected text
+	    assertTrue(successMessage.getText().contains("Student updated successfully!"));
 	}
 
 }
