@@ -12,8 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class UnitTests {
 
@@ -59,5 +60,25 @@ class UnitTests {
 		Integer totalCredits = s.getTotalCredits();
 		assert (totalCredits == testCreds);
 	}
+
+	@Test
+	@DisplayName("Test if student has correct email")
+	void testStudentEmail() {
+		Student student = new Student();
+		String email = "john.doe@example.com";
+		student.setEmail(email);
+		assertEquals(email, student.getEmail());
+	}
+
+	@Test
+	@DisplayName("Test if student has no courses by default")
+	void testStudentHasNoCoursesByDefault() {
+		Student student = new Student();
+		Optional<List<Course>> optionalCourses = Optional.ofNullable(student.getCourses());
+		assertEquals(false, optionalCourses.isPresent());
+	}
+
+
+
 
 }
