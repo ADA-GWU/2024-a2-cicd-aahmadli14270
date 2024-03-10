@@ -48,4 +48,21 @@ public class FunctionalityTests {
         System.out.printf("Found students: "+students.size());
         assertEquals(2, students.size() );
     }
+
+    @Test
+    @DisplayName("Test retrieving all students")
+    public void testGetAllStudents() {
+        // Mock data
+        Student s1 = new Student(1, "John", "Doe", "john.doe@example.com", new Date(), null, null);
+        Student s2 = new Student(2, "Alice", "Smith", "alice.smith@example.com", new Date(), null, null);
+        List<Student> studentList = List.of(s1, s2);
+
+        when(studentRepository.findAll()).thenReturn(studentList);
+
+        // Perform the test
+        List<Student> allStudents = (List<Student>) studentService.getStudentList();
+
+        // Verify the result
+        assertEquals(2, allStudents.size());
+    }
 }
