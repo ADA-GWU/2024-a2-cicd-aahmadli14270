@@ -24,8 +24,8 @@ jobs:
     - name: Build with Maven
       run: mvn -B clean verify
 
-    - name: Run unit and integration tests
-      run: mvn test
+    - name: Run unit tests
+      run: mvn -Dtest=ada.edu.demo.webtest.UnitTests test
 
     - name: Run web interface tests
       run: mvn -Dtest=ada.edu.demo.webtest.WebInterfaceTests test
