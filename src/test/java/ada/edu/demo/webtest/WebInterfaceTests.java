@@ -132,29 +132,21 @@ class WebInterfaceTests {
 	    WebElement firstNameInput = webDriver.findElement(By.id("firstName"));
 	    WebElement lastNameInput = webDriver.findElement(By.id("lastName"));
 	    WebElement emailInput = webDriver.findElement(By.id("email"));
-	    System.out.println("maybe error here1");
 	    firstNameInput.clear();
 	    firstNameInput.sendKeys("UpdatedFirstName");
-	    System.out.println("maybe error here2");
 	    lastNameInput.clear();
 	    lastNameInput.sendKeys("UpdatedLastName");
-            System.out.println("maybe error here3");
 	    emailInput.clear();
 	    emailInput.sendKeys("updated@example.com");
-	    System.out.println("maybe error here4");
 	    // Submit the form
 	    WebElement submitButton = webDriver.findElement(By.id("submit"));
 	    submitButton.click();
-	    System.out.println("maybe error here5");
 		
 	    webDriver.get("http://localhost:" + port + "/student/list");
-	    System.out.println("maybe error here6");
 
 	    List<WebElement> updatedStudents = webDriver.findElements(By.xpath("//*[contains(text(), 'UpdatedFirstName')]"));
-	    System.out.println("maybe error here7");
 
     	    assertFalse(updatedStudents.isEmpty());
-	    System.out.println("maybe error here8");
 	}
 
 }
