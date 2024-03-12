@@ -12,7 +12,6 @@ main.yml: This YAML file contains the configuration for the CI/CD pipeline. It d
 <h3>Usage:</h3>
 *** Ensure that you have access to a CI/CD platform that supports YAML configuration file such as GitHub Actions.<br>
 *** Copy the contents of the main.yml file into your project repository.<br>
-*** Customize the configuration according to your project's requirements, such as specifying build commands, test scripts, deployment targets, etc.<br>
 *** Commit and push the changes to your repository to trigger the CI/CD pipeline. (Note: pull requests are another option to trigger CI/CD pipeline. ) <br>
 
 <h3>SPECIAL NOTES:</h3>
